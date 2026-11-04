@@ -142,7 +142,7 @@ Después:
 # Qué tan lejos te escucha el micrófono
 
 # Situación	                        # Distancia aproximada
-Habitación silenciosa:              voz normal	1–2 m
-Habitación silenciosa:              voz fuerte	3–4 m
-Con ruido (gente, TV, ventilador): 	menos de 1 m
-Con los motores girando:           	Casi nada
+- Habitación silenciosa:              voz normal	1–2 m
+- Habitación silenciosa:              voz fuerte	3–4 m
+- Con ruido (gente, TV, ventilador): 	menos de 1 m
+- Con los motores girando:           	Casi nada
