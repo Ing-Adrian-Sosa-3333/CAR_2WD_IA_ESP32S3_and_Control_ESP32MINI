@@ -34,24 +34,79 @@ Pare:         	EYES_MAD (enojados) y después de 1,5 s vuelven a la normalidad
 # MAC del control: 24:A1:60:20:92:B9
 # MAC del carro: E8:F6:0A:8C:BD:34
 
-# Pasos en GitHub para generar el .bin
+# Esquema de pines de cada módulo por separado.
+
+# 🎤 Micrófono INMP441
+# INMP441	               # ESP32-S3
+VDD: 	                     3V3
+GND:	                     GND
+L/R:	                     GND (canal izquierdo)
+WS:	                       GPIO 4
+SCK:                       GPIO 5
+SD:	                       GPIO 6
+
+# 🔊 Amplificador MAX98357A + parlante
+# MAX98357A	              # ESP32-S3
+VIN:	                      5V
+GND:	                      GND
+DIN:	                      GPIO 7
+BCLK:	                      GPIO 15
+LRC:	                      GPIO 16
+GAIN / SD:	                Sin conectar
+Salida + / −:	              Parlante 4 Ω 2 W
+
+# ⚙️ Puente H L298N + 2 motores
+# L298N:	                 # Conexión
+IN1:	                       GPIO 8
+IN2:	                       GPIO 9
+ENA:	                       GPIO 12 (quitar el jumper)
+IN3:	                       GPIO 10
+IN4:	                       GPIO 11
+ENB:	                       GPIO 13 (quitar el jumper)
+OUT1 / OUT2:	               Motor izquierdo
+OUT3 / OUT4:	               Motor derecho
+12V:	                       + de las baterías (2 × 18650 = 7,4 V)
+GND:                         − de las baterías y GND del ESP32 (común)
+5V:	                         ESP32 5V
+
+# 🔘 Botones (Control inalámbrico - ESPNOW)
+# Botón	  # GPIO	   # Función
+BOOT	        0	       Ya viene en la placa: iniciar o terminar la conversación
+Hablar	      47	     Mantener presionado para hablar
+Volumen +	    40	     Subir volumen
+Volumen −	    39	     Bajar volumen
+
+# Paso 1: Copiar el proyecto XiaoZhi a tu cuenta
+- Entra a https://github.com/78/xiaozhi-esp32
+- Arriba a la derecha pulsa Fork y luego Create fork. Ahora tienes tu propia copia en github.com/TU_USUARIO/xiaozhi-esp32.
+# Paso 2: Activar la compilación automática
+- En tu copia, abre la pestaña Actions (arriba).
+- Pulsa el botón verde “I understand my workflows, go ahead and enable them”.
+# Paso 3: Subir tus archivos
+- Vuelve a la pestaña Code y entra a las carpetas main, luego boards, luego bread-compact-wifi.
+- Pulsa Add file y después Upload files.
+- Arrastra los 4 archivos: los 3 que tienes más el config.json que te pasé antes.
+- Abajo, pulsa Commit changes. GitHub reemplaza los originales por los tuyos.
+# Paso 4: Esperar la compilación
+- Ve a Actions. Verás “Build Boards” con un círculo amarillo girando.
+- Espera de 10 a 20 minutos hasta que cambie a ✅ verde. Si sale ❌ rojo, mándame una captura del error.
+# Paso 5: Descargar el .bin
+- Haz clic en esa ejecución con ✅ y baja hasta Artifacts.
+- Descarga xiaozhi_bread-compact-wifi-128x64_...: es un .zip.
+- Descomprímelo. Adentro está merged-binary.bin.
+  
+# Paso 6: Grabarlo en el ESP32
+- Con ese archivo, vuelve a la página Herramienta ESP de tu captura y sigue los pasos que te di: Conectar, Borrar flash, dirección 0x0, elegir el .bin y Programa.
 
 - Ve a tu repo → Code (Código) → main → boards → bread-compact-wifi.
 - Add file → Upload files.
 - Arrastra los 6 archivos sueltos (descomprime el .zip antes, no subas el zip).
 - Comprueba que la lista muestre los 6 nombres exactos, sin (1) ni similares.
-- 
-
-
-# Todo está bien configurado y listo para grabar:
-<img width="1747" height="845" alt="image" src="https://github.com/user-attachments/assets/2c02a355-ec55-4d77-958f-67e024e042d9" />
-
-- Flash ID 184068: confirma 16 MB de flash.
-- PSRAM 8MB: confirma que es el N16R8 ✅
-- Dirección 0x0 con merged-binary.bin ✅
-- Borrar todo está marcado ✅, así que borra la memoria antes de grabar. No necesitas pulsar “Borrar Flash” aparte.
 
 # En Artifacts descarga el primero de la lista:
+
+<img width="1921" height="712" alt="image" src="https://github.com/user-attachments/assets/c4342f00-b968-4f91-ba26-1e1a5b67fecd" />
+
 
 # ✅ xiaozhi_bread-compact-wifi-128x64_cd1ab2d... (1.81 MB)
 
@@ -62,6 +117,16 @@ Después:
 - Adentro está merged-binary.bin. Pesa más de 1.81 MB, porque el zip va comprimido.
 - Ve a:
  # https://espressif.github.io/esptool-js/
+
+ # Todo está bien configurado y listo para grabar:
+<img width="1747" height="845" alt="image" src="https://github.com/user-attachments/assets/2c02a355-ec55-4d77-958f-67e024e042d9" />
+
+- Flash ID 184068: confirma 16 MB de flash.
+- PSRAM 8MB: confirma que es el N16R8 ✅
+- Dirección 0x0 con merged-binary.bin ✅
+- Borrar todo está marcado ✅, así que borra la memoria antes de grabar. No necesitas pulsar “Borrar Flash” aparte.
+
+
 - Sigue estos pasos: Conectar → Borrar flash → dirección 0x0 → elegir merged-binary.bin → Programa → al terminar, pulsa RST.
 
 # Ahora:
