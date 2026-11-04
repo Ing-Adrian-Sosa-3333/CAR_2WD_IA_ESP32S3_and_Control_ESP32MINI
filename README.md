@@ -36,12 +36,12 @@ Pare:         	EYES_MAD (enojados) y después de 1,5 s vuelven a la normalidad
 
 # Pasos en GitHub para generar el .bin
 
-Ve a tu repo → Code (Código) → main → boards → bread-compact-wifi.
-Add file → Upload files.
-Arrastra los 6 archivos sueltos (descomprime el .zip antes, no subas el zip).
-Comprueba que la lista muestre los 6 nombres exactos, sin (1) ni similares.
+- Ve a tu repo → Code (Código) → main → boards → bread-compact-wifi.
+- Add file → Upload files.
+- Arrastra los 6 archivos sueltos (descomprime el .zip antes, no subas el zip).
+- Comprueba que la lista muestre los 6 nombres exactos, sin (1) ni similares.
+- 
 
-<img width="1747" height="845" alt="image" src="https://github.com/user-attachments/assets/d1171ccd-f1bf-4c6f-a72e-bec16d9147fd" />
 
 # Todo está bien configurado y listo para grabar:
 <img width="1747" height="845" alt="image" src="https://github.com/user-attachments/assets/2c02a355-ec55-4d77-958f-67e024e042d9" />
@@ -50,6 +50,19 @@ Comprueba que la lista muestre los 6 nombres exactos, sin (1) ni similares.
 - PSRAM 8MB: confirma que es el N16R8 ✅
 - Dirección 0x0 con merged-binary.bin ✅
 - Borrar todo está marcado ✅, así que borra la memoria antes de grabar. No necesitas pulsar “Borrar Flash” aparte.
+
+# En Artifacts descarga el primero de la lista:
+
+# ✅ xiaozhi_bread-compact-wifi-128x64_cd1ab2d... (1.81 MB)
+
+Haz clic en el ícono de descarga ⬇ que está a la derecha de esa fila, junto al tacho de basura (no toques el tacho). También puedes hacer clic directamente en el nombre.
+
+Después:
+- Se descarga un .zip. Haz clic derecho sobre él y elige Extraer todo.
+- Adentro está merged-binary.bin. Pesa más de 1.81 MB, porque el zip va comprimido.
+- Ve a:
+ # https://espressif.github.io/esptool-js/
+- Sigue estos pasos: Conectar → Borrar flash → dirección 0x0 → elegir merged-binary.bin → Programa → al terminar, pulsa RST.
 
 # Ahora:
 
